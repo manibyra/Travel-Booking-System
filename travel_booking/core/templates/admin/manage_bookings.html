@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Manage Bookings</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Travel</th>
+            <th>Status</th>
+            <th>Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.id }}</td>
+            <td>{{ booking.user.username }}</td>
+            <td>{{ booking.travel_type }}</td>
+            <td>{{ booking.travel_option.name }}</td>
+            <td>{{ booking.status }}</td>
+            <td>
+                {% if booking.status == 'Confirmed' %}
+                    <a class="btn-red" href="{% url 'cancel_booking_admin' booking.id %}">Cancel</a>
+                {% else %}
+                    Cancelled
+                {% endif %}
+            </td>
+            <td>
+                {% if booking.status != "Cancelled" %}
+                    <a href="{% url 'admin_cancel_booking' booking.booking_id %}" class="btn btn-danger btn-sm">Cancel</a>
+                {% else %}
+                    <span class="text-muted">Cancelled</span>
+                {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

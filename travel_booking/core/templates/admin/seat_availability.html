@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Seat Availability</h2>
+
+{% for travel_type, travels in availability.items %}
+    <h3>{{ travel_type|title }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Available Seats</th>
+                <th>Total Seats</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for travel in travels %}
+            <tr>
+                <td>{{ travel.id }}</td>
+                <td>{{ travel.name }}</td>
+                <td>{{ travel.source }}</td>
+                <td>{{ travel.destination }}</td>
+                <td>{{ travel.available_seats }}</td>
+                <td>{{ travel.total_seats }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+{% endblock %}

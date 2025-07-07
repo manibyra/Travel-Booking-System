@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="card">
+    <h3>Travel Management</h3>
+    <a class="btn" href="{% url 'add_travel' 'flight' %}">Add Flight</a>
+    <a class="btn" href="{% url 'add_travel' 'train' %}">Add Train</a>
+    <a class="btn" href="{% url 'add_travel' 'bus' %}">Add Bus</a>
+</div>
+
+<div class="card">
+    <h3>Users</h3>
+    <a class="btn" href="{% url 'manage_users' %}">Manage Users</a>
+</div>
+
+<div class="card">
+    <h3>Bookings</h3>
+    <a class="btn" href="{% url 'manage_bookings' %}">Manage Bookings</a>
+</div>
+
+<div class="card">
+    <h3>Seat Availability</h3>
+    <a class="btn" href="{% url 'seat_availability' %}">View Availability</a>
+</div>
+{% endblock %}

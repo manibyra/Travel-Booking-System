@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Manage Users</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Aadhaar</th>
+            <th>Address</th>
+            <th>Bookings</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.aadhaar }}</td>
+            <td>{{ user.address }}</td>
+            <td>
+                <a class="btn" href="{% url 'user_bookings' user.id %}">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

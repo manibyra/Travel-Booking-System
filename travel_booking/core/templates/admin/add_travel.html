@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add {{ travel_type|title }}</h2>
+
+<form action="{% url 'add_travel' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add {{ travel_type|title }}</button>
+</form>
+{% endblock %}

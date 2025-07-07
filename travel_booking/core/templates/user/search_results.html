@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if travel_type and date %}
+        <h2 class="text-center mb-4">
+            {% if travel_type and date %}
+                Available {{ travel_type|title }}{% if travel_type != 'bus' %}s{% endif %} on {{ date }}
+            {% else %}
+                Search Results
+            {% endif %}
+        </h2>
+    {% else %}
+        <h2 class="text-center mb-4">Search Results</h2>
+    {% endif %}
+
+    {% if options %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Available Seats</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for option in options %}
+                    <tr>
+                        <td>{{ option.name }}</td>
+                        <td>{{ option.source }}</td>
+                        <td>{{ option.destination }}</td>
+                        <td>{{ option.departure_time|date:"Y-m-d H:i" }}</td>
+                        <td>{{ option.arrival_time|date:"Y-m-d H:i" }}</td>
+                        <td>{{ option.available_seats }}</td>
+                        <td>₹{{ option.price }}</td>
+                        <td>
+                            <a href="{% url 'book_travel' travel_type option.id date %}" class="btn btn-success btn-sm">Book</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center mt-4 text-danger">
+            No {{ travel_type|title }}{% if travel_type != 'bus' %}s{% endif %} available for the selected route and date.
+        </p>
+    {% endif %}
+</div>
+{% endblock %}

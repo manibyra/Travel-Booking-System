@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Passenger Details</h2>
+<form action="{% url 'passenger_info' booking_id %}" method="post">
+  {% csrf_token %}
+  {% for form in formset %}
+    <div class="mb-4">
+      {{ form.as_p }}
+    </div>
+  {% endfor %}
+  <button type="submit" class="btn">Confirm Booking</button>
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+<form method="post">
+    {% csrf_token %}
+    <label>Seats:</label>
+    <input type="number" name="seats" id="seat-count" required><br>
+
+    <div id="passenger-details"></div>
+
+    <button type="submit">Book</button>
+</form>
+
+<script>
+document.getElementById('seat-count').addEventListener('change', function() {
+    let count = parseInt(this.value);
+    let container = document.getElementById('passenger-details');
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+        container.innerHTML += `
+            <h4>Passenger ${i + 1}</h4>
+            Name: <input type="text" name="name_${i}" required><br>
+            Age: <input type="number" name="age_${i}" required><br>
+            Gender:
+            <select name="gender_${i}" required>
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br><br>
+        `;
+    }
+});
+</script>

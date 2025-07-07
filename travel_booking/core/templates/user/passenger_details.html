@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Passenger Details ({{ seat_count }} Seats)</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for i in seat_range %}
+        <fieldset>
+            <legend>Passenger {{ i }}</legend>
+            <label>Name:</label>
+            <input type="text" name="name_{{ i }}" required>
+
+            <label>Age:</label>
+            <input type="number" name="age_{{ i }}" min="1" required>
+
+            <label>Gender:</label>
+            <select name="gender_{{ i }}">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </fieldset>
+    {% endfor %}
+    <button type="submit">Confirm Booking</button>
+</form>
+{% endblock %}

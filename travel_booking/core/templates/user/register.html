@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>User Registration</h2>
+
+    {% for message in messages %}
+    {% endfor %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="full_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="phone" class="form-control" maxlength="10" required>
+        </div>
+        <div class="form-group">
+            <label>Aadhaar Number</label>
+            <input type="text" name="aadhaar" class="form-control" maxlength="12" required>
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <textarea name="address" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Register</button>
+    </form>
+</div>
+<p style="text-align: center; margin-top: 10px;">
+    Already have an account? <a href="{% url 'login' %}">Login here</a>
+</p>
+
+{% endblock %}

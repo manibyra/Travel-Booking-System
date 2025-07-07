@@ -1,0 +1,9 @@
+<!-- travel_booking/core/templates/user/user_dashboard.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Welcome, {{ request.user.full_name }}</h2>
+  <p>Use the menu to search and book your travel.</p>
+  <a href="{% url 'search_travel' %}" class="btn btn-primary">Search Travels </a>
+  <a href="{% url 'my_bookings' %}" class="btn btn-secondary">View My Bookings</a>
+{% endblock %}

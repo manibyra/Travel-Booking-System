@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="mb-4 text-center">Search Travel Options</h2>
+        <form method="get" action="{% url 'search_travel' %}">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="travel_type">Type:</label>
+                    <select name="travel_type" id="travel_type" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="flight" {% if request.GET.travel_type == "flight" %}selected{% endif %}>Flight</option>
+                        <option value="train" {% if request.GET.travel_type == "train" %}selected{% endif %}>Train</option>
+                        <option value="bus" {% if request.GET.travel_type == "bus" %}selected{% endif %}>Bus</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="source">Source:</label>
+                    <input type="text" name="source" id="source" class="form-control" placeholder="e.g., Vijayawada"
+                        value="{{ request.GET.source }}" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="destination">Destination:</label>
+                    <input type="text" name="destination" id="destination" class="form-control" placeholder="e.g., Chennai"
+                        value="{{ request.GET.destination }}" required>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label for="travel_date">Date:(Optional)</label>
+                     <input type="date" name="travel_date" id="travel_date" class="form-control" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-4">Search</button>
+            </div>
+        </form>
+        {% if results %}
+            <h3 class="mt-5">Available {{ travel_type|title }} Options</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Available Seats</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for option in results %}
+                    <tr>
+                        <td>{{ option.name }}</td>
+                        <td>{{ option.source }}</td>
+                        <td>{{ option.destination }}</td>
+                        <td>{{ option.departure_time }}</td>
+                        <td>{{ option.arrival_time }}</td>
+                        <td>{{ option.available_seats }}</td>
+                        <td>₹{{ option.price }}</td>
+                        <td>
+                            <a href="{% url 'book_travel' travel_type=travel_type travel_id=option.id %}" class="btn btn-success btn-sm">Book</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% elif travel_type %}
+            <p class="mt-4 text-danger">No {{ travel_type }} options found for the selected route.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

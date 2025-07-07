@@ -1,0 +1,20 @@
+<h2>Booking Confirmed</h2>
+<p><strong>Booking ID:</strong> {{ booking.booking_id }}</p>
+<p><strong>Travel ID:</strong> {{ travel.id }}</p>
+<p><strong>Type:</strong> {{ booking.travel_type }}</p>
+<p><strong>Name:</strong> {{ travel.name }}</p>
+<p><strong>Route:</strong> {{ travel.source }} to {{ travel.destination }}</p>
+<p><strong>Departure:</strong> {{ travel.departure_time }}</p>
+<p><strong>Arrival:</strong> {{ travel.arrival_time }}</p>
+<p><strong>Booked Seats:</strong> {{ booking.number_of_seats }}</p>
+<p><strong>Total Price:</strong> ₹{{ booking.total_price }}</p>
+<p><strong>Status:</strong> {{ booking.status }}</p>
+
+<h3>Passenger Details:</h3>
+<ul>
+    {% for p in passengers %}
+        <li>{{ p.name }}, {{ p.age }} years, {{ p.gender }} — Seat No: {{ p.seat_no }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'user_dashboard' %}">Back to Dashboard</a>
